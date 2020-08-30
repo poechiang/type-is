@@ -1,6 +1,6 @@
 import '../dist/lib/proto.js';
-import { is } from '../dist/index.js';
-console.log( is, is.type )
+const { is } = require( '../dist/index.js' );
+
 const
     o = {},
     oo = { x: 1, y: 2, z: 3 },
