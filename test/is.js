@@ -1,4 +1,4 @@
-import '../dist/lib/proto.js';
+const '../dist/lib/proto.js';
 const { is } = require( '../dist/index.js' );
 
 const
