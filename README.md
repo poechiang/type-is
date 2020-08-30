@@ -1,2 +1,5 @@
-# type-is
+# type-is.poe
 type testing javascript library
+
+## Usage
+

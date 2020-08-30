@@ -1,7 +1,7 @@
 "use strict"
 import extend from 'extend';
 import getType from './type.js';
-import { isArgs, isArray, isBool, isEmpty, isFunction, isObject, isNumber, isString } from './is.js';
+import { isArgs, isArray, isBool, isEmpty, isError, isFunction, isObject, isNumber, isString, isWindow } from './is.js';
 
 
 const extendObj = function ( ...objects ) {
@@ -77,6 +77,15 @@ if ( !Object.prototype.is ) {
         }
     } )
 
+    Object.defineProperty( Object.prototype, 'likeArray', {
+        enumerable: false,
+        configerable: false,
+        writable: false,
+        value: function ( ) {
+            return isArray.like( this );
+        }
+    } )
+
     Object.defineProperty( Object.prototype, 'isBool', {
         enumerable: false,
         configerable: false,
@@ -92,6 +101,15 @@ if ( !Object.prototype.is ) {
         writable: false,
         value: function ( ) {
             return isEmpty( this );
+        }
+    } )
+
+    Object.defineProperty( Object.prototype, 'isError', {
+        enumerable: false,
+        configerable: false,
+        writable: false,
+        value: function ( ) {
+            return isError( this );
         }
     } )
 
@@ -164,6 +182,15 @@ if ( !Object.prototype.is ) {
         writable: false,
         value: function ( ) {
             return isString.empty( this );
+        }
+    } )
+
+    Object.defineProperty( Object.prototype, 'isWindow', {
+        enumerable: false,
+        configerable: false,
+        writable: false,
+        value: function ( ) {
+            return isWindow( this );
         }
     } )
 }

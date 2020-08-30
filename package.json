@@ -1,18 +1,19 @@
 {
-  "name": "type-is",
+  "name": "type-is.poe",
   "version": "1.0.0",
   "description": "js type testing library",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "repository": "git@github.com:poechiang/type-is.git",
+  "homepage": "https://github.com/poechiang/type-is",
   "author": "poe.chiang <poechiang@live.cn>",
   "license": "MIT",
   "private": false,
+  "bugs": "https://github.com/poechiang/type-is/issuse",
   "type": "module",
+  "files": ["dist/*.js"],
   "scripts": {
     "build": "babel src --out-dir dist",
-    "test-is": "node test/is.js",
-    "test-type": "node test/type.js",
-    "test-proto": "node test/proto.js"
+    "test": "node test/is.js"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

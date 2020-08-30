@@ -35,6 +35,16 @@ isArgs.empty = ( value ) => isArgs( value ) && isEmpty( value );
 const isArray = Array.isArray || ( ( value ) => getTypeRegex( 'array' ).test( fnToStr.call( value ) ) );
 
 isArray.empty = ( value ) => isArray( value ) && isEmpty( value );
+isArray.like = ( value ) => {
+    var length = !!value && value.length,
+        type = getType( value );
+
+    if ( isFunction( value ) || isWindow( value ) ) {
+        return false;
+    }
+
+    return type === "array" || length === 0 || getType( length ) === "number" && length > 0 && ( length - 1 ) in value;
+}
 
 const isBool = ( value ) => getTypeRegex( 'boolean' ).test( fnToStr.call( value ) );
 
@@ -50,6 +60,8 @@ const isEmpty = ( value ) => {
     }
     return !value;
 };
+
+const isError = ( value ) => getTypeRegex( 'error' ).test( fnToStr.call( value ) );
 
 const isFunction = ( value ) => getTypeRegex( 'function' ).test( fnToStr.call( value ) );
 
@@ -89,6 +101,7 @@ const isString = ( value ) => getTypeRegex( 'string' ).test( fnToStr.call( value
 
 isString.empty = ( value ) => getTypeRegex( 'string' ).test( fnToStr.call( value ) ) && value.length <= 0;
 
+const isWindow = ( value ) => !isNull( value ) && obj === obj.window;
 
 
 const is = function ( value ) {
@@ -98,16 +111,19 @@ const is = function ( value ) {
         bool: ( ) => isBool( value ),
         date: ( ) => isDate( value ),
         empty: ( ) => isEmpty( value ),
+        error: ( ) => isError( value ),
         function: ( ) => isFunction( value ),
         object: ( ) => isObject( value ),
         null: ( ) => isNull( value ),
         number: ( ) => isNumber( value ),
         string: ( ) => isString( value ),
         undefined: ( ) => isUndefined( value ),
+        window: ( ) => isWindow( value ),
         type: ( ) => getType( value )
     };
     fns.args.empty = ( ) => isArgs.empty( value );
     fns.array.empty = ( ) => isArray.empty( value );
+    fns.array.like = ( ) => isArray.like( value );
     fns.object.empty = ( ) => isObject.empty( value );
     fns.object.plain = ( ) => isObject.plain( value );
     fns.string.empty = ( ) => isString.empty( value );
@@ -123,12 +139,14 @@ extend( true, is, {
     bool: isBool,
     date: isDate,
     empty: isEmpty,
+    error: isError,
     function: isFunction,
     object: isObject,
     null: isNull,
     number: isNumber,
     string: isString,
     undefined: isUndefined,
+    widnow: isWindow,
     type: getType,
 } )
 
@@ -137,10 +155,12 @@ export { isArray };
 export { isBool };
 export { isDate };
 export { isEmpty };
+export { isError };
 export { isFunction };
 export { isObject };
 export { isNull };
 export { isNumber };
 export { isString };
 export { isUndefined };
+export { isWindow };
 export default is
