@@ -1,2 +1,2 @@
 # type-is
-Type judgment javascript library
+type testing javascript library

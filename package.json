@@ -1,0 +1,19 @@
+{
+  "name": "type-is",
+  "version": "1.0.0",
+  "description": "js type testing library",
+  "main": "src/index.js",
+  "repository": "git@github.com:poechiang/type-is.git",
+  "author": "poe.chiang <poechiang@live.cn>",
+  "license": "MIT",
+  "private": false,
+  "type": "module",
+  "scripts": {
+    "test-is": "node test/is.js",
+    "test-type": "node test/type.js",
+    "test-proto": "node test/proto.js"
+  },
+  "devDependencies": {
+    "extend": "^3.0.2"
+  }
+}
