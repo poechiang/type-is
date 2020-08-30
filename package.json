@@ -9,11 +9,15 @@
   "private": false,
   "type": "module",
   "scripts": {
+    "build": "babel src --out-dir dist",
     "test-is": "node test/is.js",
     "test-type": "node test/type.js",
     "test-proto": "node test/proto.js"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
     "extend": "^3.0.2"
-  }
+  },
+  "dependencies": {}
 }
