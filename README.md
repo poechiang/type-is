@@ -16,10 +16,10 @@ $ yarn add type-is.poe --D
 
 ## Usage
 
-```js
-
 
 Introduce a global object, which can ensure that the existing type prototype is not polluted:
+
+```js
 import {is} from 'type-is.poe';
 
 
@@ -34,6 +34,7 @@ console.log(is.object.empty(o))		// true
 
 
 Or use the following method to personalize the object prototype chain and use it directly through object instances:
+
 ```js
 import 'type-is.poe/dist/lib/proto';
 
