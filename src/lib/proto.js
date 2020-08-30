@@ -1,7 +1,7 @@
 "use strict"
 import extend from 'extend';
 import getType from './type.js';
-import { isArgs, isArray, isBool, isEmpty, isError, isFunction, isObject, isNumber, isString, isWindow } from './is.js';
+import { isArgs, isArray, isBool, isEmpty, isError, isFunction, isObject, isPromise, isNumber, isString, isWindow } from './is.js';
 
 
 const extendObj = function ( ...objects ) {
@@ -28,6 +28,16 @@ if ( !Object.extend ) {
         configerable: false,
         writable: false,
         value: extendObj
+    } )
+}
+if ( !Object.type ) {
+    Object.defineProperty( Object, 'type', {
+        enumerable: false,
+        configerable: false,
+        writable: false,
+        value: function ( ) {
+            return getType( this );
+        }
     } )
 }
 
@@ -137,6 +147,16 @@ if ( !Object.prototype.is ) {
         writable: false,
         value: function ( ) {
             return isObject.empty( this );
+        }
+    } )
+
+
+    Object.defineProperty( Object.prototype, 'isPromise', {
+        enumerable: false,
+        configerable: false,
+        writable: false,
+        value: function ( ) {
+            return isPromise( this );
         }
     } )
 

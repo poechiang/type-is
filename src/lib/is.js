@@ -89,8 +89,6 @@ isObject.plain = ( value ) => {
 
 const isNull = ( value ) => getTypeRegex( 'null' ).test( fnToStr.call( value ) );
 
-const isUndefined = ( value ) => getTypeRegex( 'undefined' ).test( fnToStr.call( value ) );
-
 const isNumber = ( value ) => getTypeRegex( 'number' ).test( value );
 
 isNumber.isNan = isNaN;
@@ -100,6 +98,8 @@ const isPromise = ( value ) => getTypeRegex( 'promise' ).test( fnToStr.call( val
 const isString = ( value ) => getTypeRegex( 'string' ).test( fnToStr.call( value ) );
 
 isString.empty = ( value ) => getTypeRegex( 'string' ).test( fnToStr.call( value ) ) && value.length <= 0;
+
+const isUndefined = ( value ) => getTypeRegex( 'undefined' ).test( fnToStr.call( value ) );
 
 const isWindow = ( value ) => !isNull( value ) && obj === obj.window;
 
@@ -114,6 +114,7 @@ const is = function ( value ) {
         error: ( ) => isError( value ),
         function: ( ) => isFunction( value ),
         object: ( ) => isObject( value ),
+        promise: ( ) => isPromise( value ),
         null: ( ) => isNull( value ),
         number: ( ) => isNumber( value ),
         string: ( ) => isString( value ),
@@ -142,6 +143,7 @@ extend( true, is, {
     error: isError,
     function: isFunction,
     object: isObject,
+    promise: isPromise,
     null: isNull,
     number: isNumber,
     string: isString,
@@ -157,6 +159,7 @@ export { isDate };
 export { isEmpty };
 export { isError };
 export { isFunction };
+export { isPromise };
 export { isObject };
 export { isNull };
 export { isNumber };

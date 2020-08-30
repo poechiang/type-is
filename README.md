@@ -16,6 +16,82 @@ $ yarn add type-is.poe --D
 
 ## Usage
 
+```js
+
+
+Introduce a global object, which can ensure that the existing type prototype is not polluted:
+import {is} from 'type-is.poe';
+
+
+let O = {a:1,b:2};
+let o = {};
+
+console.log(is(O).object());		// true
+console.log(is(O).object.empty())	// false
+console.log(is.object(o))			// true
+console.log(is.object.empty(o))		// true
+```
+
+
+Or use the following method to personalize the object prototype chain and use it directly through object instances:
+```js
+import 'type-is.poe/dist/lib/proto';
+
+
+let O = {a:1,b:2};
+let o = {};
+
+console.log(O.isObject());			// true
+console.log(O.isEmptyObject())		// false
+console.log(o.isObject())			// true
+console.log(o.isEmptyObject())		// true
+```
+
+## API
+
++ is()
+    - args()
+        * empty()
+    - array()
+        * empty()
+        * like()
+    - bool()
+    - date()
+    - empty()
+    - error()
+    - function()
+    - object()
+        * empty()
+        * plain()
+    - null()
+    - number()
+        * nan()
+    - promise()
+    - string()
+        * empty()
+    - undefined()
+    - window()
+
++ Oject.prototype
+    - isArgs()
+    - isEmptyArgs()
+    - isArray()
+    - isEmptyArray()
+    - isLikeArray()
+    - isBool()
+    - isDate()
+    - isEmpty()
+    - isError()
+    - isFunction()
+    - isObject()
+    - isEmptyObject()
+    - isPlainObject()
+    - isNumber()
+    - isNaN()
+    - isPromise()
+    - isString()
+    - isEmptyString()
+    - isWindow()
 
 
 ## Test
