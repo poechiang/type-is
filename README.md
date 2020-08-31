@@ -66,8 +66,15 @@ console.log(o.isEmptyObject())		// true
         * plain()
     - null()
     - number()
+    	* float()				// 1.0.6
+    	* infinite()			// 1.0.6
+    	* int()					// 1.0.6
+    	* even()				// 1.0.6
+    	* odd()					// 1.0.6
         * nan()
     - promise()
+    - regexp()					// 1.0.6
+    - symbol()					// 1.0.6
     - string()
         * empty()
     - undefined()
@@ -88,14 +95,23 @@ console.log(o.isEmptyObject())		// true
     - isEmptyObject()
     - isPlainObject()
     - isNumber()
+    - isFloatNumber()			// 1.0.6
+    - isInfiniteNumber()		// 1.0.6
+    - isIntNumber()				// 1.0.6
+    - isEvenIntNumber()			// 1.0.6
+    - isOddIntNumber()			// 1.0.6
     - isNaN()
     - isPromise()
+    - isRegExp()				// 1.0.6
+    - isSymbol()				// 1.0.6
     - isString()
     - isEmptyString()
     - isWindow()
 
 
-## Test
+
+
+## Test (v1.0.4)
 
 ```js
 const '../dist/lib/proto.js';

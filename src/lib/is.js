@@ -91,13 +91,39 @@ const isNull = ( value ) => getTypeRegex( 'null' ).test( fnToStr.call( value ) )
 
 const isNumber = ( value ) => getTypeRegex( 'number' ).test( value );
 
-isNumber.isNan = isNaN;
+isNumber.float = ( value ) => {
+    if ( !isNumber( value ) ) {
+        return false;
+    }
+    if ( isNumber.infinite( value ) ) {
+        return true
+    }
+    if ( value === 0 ) {
+        // 0.0 0. .0 .00
+        return /\./.test( value + '' )
+    }
+    return ~~value !== value;
+}
+
+isNumber.infinite = ( value ) => ( value === Infinite || value === -Infinite );
+
+isNumber.int = ( value ) => ( isNumber( value ) && !isNumber.nan( value ) && ( isNumber.infinite( value ) || ( value % 1 ) === 0 ) );
+
+isNumber.even = ( value ) => ( isNumber.infinite( value ) || isNumber.int( value ) && !isNaN( value ) && value % 2 === 0 );
+
+isNumber.odd = ( value ) => ( isNumber.infinite( value ) || isNumber.int( value ) && !isNaN( value ) && value % 2 !== 0 );
+
+isNumber.nan = isNaN;
 
 const isPromise = ( value ) => getTypeRegex( 'promise' ).test( fnToStr.call( value ) );
+
+const isRegExp = ( value ) => getTypeRegex( 'regexp' ).test( fnToStr.call( value ) );
 
 const isString = ( value ) => getTypeRegex( 'string' ).test( fnToStr.call( value ) );
 
 isString.empty = ( value ) => getTypeRegex( 'string' ).test( fnToStr.call( value ) ) && value.length <= 0;
+
+const isSymbol = ( value ) => getTypeRegex( 'symbol' ).test( fnToStr.call( value ) );
 
 const isUndefined = ( value ) => getTypeRegex( 'undefined' ).test( fnToStr.call( value ) );
 
@@ -117,6 +143,8 @@ const is = function ( value ) {
         promise: ( ) => isPromise( value ),
         null: ( ) => isNull( value ),
         number: ( ) => isNumber( value ),
+        regexp: ( ) => isRegExp( value ),
+        symbol: ( ) => isSymbol( value ),
         string: ( ) => isString( value ),
         undefined: ( ) => isUndefined( value ),
         window: ( ) => isWindow( value ),
@@ -125,6 +153,12 @@ const is = function ( value ) {
     fns.args.empty = ( ) => isArgs.empty( value );
     fns.array.empty = ( ) => isArray.empty( value );
     fns.array.like = ( ) => isArray.like( value );
+    fns.number.float = ( ) => isNumber.float( value );
+    fns.number.infinite = ( ) => isNumber.infinite( value );
+    fns.number.int = ( ) => isNumber.int( value );
+    fns.number.even = ( ) => isNumber.even( value );
+    fns.number.odd = ( ) => isNumber.odd( value );
+    fns.number.nan = ( ) => isNumber.nan( value );
     fns.object.empty = ( ) => isObject.empty( value );
     fns.object.plain = ( ) => isObject.plain( value );
     fns.string.empty = ( ) => isString.empty( value );
@@ -146,6 +180,8 @@ extend( true, is, {
     promise: isPromise,
     null: isNull,
     number: isNumber,
+    regexp: isRegExp,
+    symbol: isSymbol,
     string: isString,
     undefined: isUndefined,
     widnow: isWindow,
@@ -163,6 +199,8 @@ export { isPromise };
 export { isObject };
 export { isNull };
 export { isNumber };
+export { isRegExp };
+export { isSymbol };
 export { isString };
 export { isUndefined };
 export { isWindow };

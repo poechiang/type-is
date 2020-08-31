@@ -1,7 +1,7 @@
 "use strict"
 import extend from 'extend';
 import getType from './type.js';
-import { isArgs, isArray, isBool, isEmpty, isError, isFunction, isObject, isPromise, isNumber, isString, isWindow } from './is.js';
+import { isArgs, isArray, isBool, isEmpty, isError, isFunction, isObject, isPromise, isNumber, isRegExp, isSymbol, isString, isWindow } from './is.js';
 
 
 const extendObj = function ( ...objects ) {
@@ -178,12 +178,75 @@ if ( !Object.prototype.is ) {
         }
     } )
 
+    Object.defineProperty( Object.prototype, 'isFloatNumber', {
+        enumerable: false,
+        configerable: false,
+        writable: false,
+        value: function ( ) {
+            return isNumber.float( this );
+        }
+    } )
+
+    Object.defineProperty( Object.prototype, 'isInfiniteNumber', {
+        enumerable: false,
+        configerable: false,
+        writable: false,
+        value: function ( ) {
+            return isNumber.infinite( this );
+        }
+    } )
+
+    Object.defineProperty( Object.prototype, 'isIntNumber', {
+        enumerable: false,
+        configerable: false,
+        writable: false,
+        value: function ( ) {
+            return isNumber.int( this );
+        }
+    } )
+
+    Object.defineProperty( Object.prototype, 'isEvenIntNumber', {
+        enumerable: false,
+        configerable: false,
+        writable: false,
+        value: function ( ) {
+            return isNumber.even( this );
+        }
+    } )
+
+    Object.defineProperty( Object.prototype, 'isOddIntNumber', {
+        enumerable: false,
+        configerable: false,
+        writable: false,
+        value: function ( ) {
+            return isNumber.odd( this );
+        }
+    } )
+
     Object.defineProperty( Object.prototype, 'isNaN', {
         enumerable: false,
         configerable: false,
         writable: false,
         value: function ( ) {
             return isNaN( this );
+        }
+    } )
+
+    Object.defineProperty( Object.prototype, 'isRegExp', {
+        enumerable: false,
+        configerable: false,
+        writable: false,
+        value: function ( ) {
+            return isRegExp( this );
+        }
+    } )
+
+    Object.defineProperty( Object.prototype, 'isSymbol', {
+        enumerable: false,
+        configerable: false,
+        writable: false,
+        value: function ( ) {
+            return isSymbol( this );
         }
     } )
 
