@@ -109,7 +109,7 @@ console.log(o.isEmptyObject())		// true
 
 
 
-## Test (v1.0.4)
+## Test 
 
 
 ### 1.0.8
