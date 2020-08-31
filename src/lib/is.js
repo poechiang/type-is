@@ -89,29 +89,26 @@ isObject.plain = ( value ) => {
 
 const isNull = ( value ) => getTypeRegex( 'null' ).test( fnToStr.call( value ) );
 
-const isNumber = ( value ) => getTypeRegex( 'number' ).test( value );
+const isNumber = ( value ) => getTypeRegex( 'number' ).test( fnToStr.call( value ) );
 
 isNumber.float = ( value ) => {
     if ( !isNumber( value ) ) {
         return false;
     }
-    if ( isNumber.infinite( value ) ) {
+    if ( isNumber.infinity( value ) ) {
         return true
     }
-    if ( value === 0 ) {
-        // 0.0 0. .0 .00
-        return /\./.test( value + '' )
-    }
-    return ~~value !== value;
+
+    return value !== 0 && ~~value !== value;
 }
 
-isNumber.infinite = ( value ) => ( value === Infinite || value === -Infinite );
+isNumber.infinity = ( value ) => ( value === Infinity || value === -Infinity );
 
-isNumber.int = ( value ) => ( isNumber( value ) && !isNumber.nan( value ) && ( isNumber.infinite( value ) || ( value % 1 ) === 0 ) );
+isNumber.int = ( value ) => ( isNumber( value ) && !isNumber.nan( value ) && ( isNumber.infinity( value ) || ( value % 1 ) === 0 ) );
 
-isNumber.even = ( value ) => ( isNumber.infinite( value ) || isNumber.int( value ) && !isNaN( value ) && value % 2 === 0 );
+isNumber.even = ( value ) => ( isNumber.infinity( value ) || isNumber.int( value ) && !isNumber.nan( value ) && ( value % 2 ) === 0 );
 
-isNumber.odd = ( value ) => ( isNumber.infinite( value ) || isNumber.int( value ) && !isNaN( value ) && value % 2 !== 0 );
+isNumber.odd = ( value ) => ( isNumber.infinity( value ) || isNumber.int( value ) && !isNumber.nan( value ) && ( value % 2 ) !== 0 );
 
 isNumber.nan = isNaN;
 
@@ -154,7 +151,7 @@ const is = function ( value ) {
     fns.array.empty = ( ) => isArray.empty( value );
     fns.array.like = ( ) => isArray.like( value );
     fns.number.float = ( ) => isNumber.float( value );
-    fns.number.infinite = ( ) => isNumber.infinite( value );
+    fns.number.infinity = ( ) => isNumber.infinity( value );
     fns.number.int = ( ) => isNumber.int( value );
     fns.number.even = ( ) => isNumber.even( value );
     fns.number.odd = ( ) => isNumber.odd( value );

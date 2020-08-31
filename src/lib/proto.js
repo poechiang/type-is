@@ -187,15 +187,6 @@ if ( !Object.prototype.is ) {
         }
     } )
 
-    Object.defineProperty( Object.prototype, 'isInfiniteNumber', {
-        enumerable: false,
-        configerable: false,
-        writable: false,
-        value: function ( ) {
-            return isNumber.infinite( this );
-        }
-    } )
-
     Object.defineProperty( Object.prototype, 'isIntNumber', {
         enumerable: false,
         configerable: false,
@@ -223,14 +214,6 @@ if ( !Object.prototype.is ) {
         }
     } )
 
-    Object.defineProperty( Object.prototype, 'isNaN', {
-        enumerable: false,
-        configerable: false,
-        writable: false,
-        value: function ( ) {
-            return isNaN( this );
-        }
-    } )
 
     Object.defineProperty( Object.prototype, 'isRegExp', {
         enumerable: false,

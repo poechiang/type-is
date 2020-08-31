@@ -195,14 +195,6 @@ if (!Object.prototype.is) {
       return _is.isNumber["float"](this);
     }
   });
-  Object.defineProperty(Object.prototype, 'isInfiniteNumber', {
-    enumerable: false,
-    configerable: false,
-    writable: false,
-    value: function value() {
-      return _is.isNumber.infinite(this);
-    }
-  });
   Object.defineProperty(Object.prototype, 'isIntNumber', {
     enumerable: false,
     configerable: false,
@@ -225,14 +217,6 @@ if (!Object.prototype.is) {
     writable: false,
     value: function value() {
       return _is.isNumber.odd(this);
-    }
-  });
-  Object.defineProperty(Object.prototype, 'isNaN', {
-    enumerable: false,
-    configerable: false,
-    writable: false,
-    value: function value() {
-      return isNaN(this);
     }
   });
   Object.defineProperty(Object.prototype, 'isRegExp', {

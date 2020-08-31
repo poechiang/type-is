@@ -137,7 +137,7 @@ var isNull = function isNull(value) {
 exports.isNull = isNull;
 
 var isNumber = function isNumber(value) {
-  return getTypeRegex('number').test(value);
+  return getTypeRegex('number').test(fnToStr.call(value));
 };
 
 exports.isNumber = isNumber;
@@ -147,32 +147,27 @@ isNumber["float"] = function (value) {
     return false;
   }
 
-  if (isNumber.infinite(value)) {
+  if (isNumber.infinity(value)) {
     return true;
   }
 
-  if (value === 0) {
-    // 0.0 0. .0 .00
-    return /\./.test(value + '');
-  }
-
-  return ~~value !== value;
+  return value !== 0 && ~~value !== value;
 };
 
-isNumber.infinite = function (value) {
-  return value === Infinite || value === -Infinite;
+isNumber.infinity = function (value) {
+  return value === Infinity || value === -Infinity;
 };
 
 isNumber["int"] = function (value) {
-  return isNumber(value) && !isNumber.nan(value) && (isNumber.infinite(value) || value % 1 === 0);
+  return isNumber(value) && !isNumber.nan(value) && (isNumber.infinity(value) || value % 1 === 0);
 };
 
 isNumber.even = function (value) {
-  return isNumber.infinite(value) || isNumber["int"](value) && !isNaN(value) && value % 2 === 0;
+  return isNumber.infinity(value) || isNumber["int"](value) && !isNumber.nan(value) && value % 2 === 0;
 };
 
 isNumber.odd = function (value) {
-  return isNumber.infinite(value) || isNumber["int"](value) && !isNaN(value) && value % 2 !== 0;
+  return isNumber.infinity(value) || isNumber["int"](value) && !isNumber.nan(value) && value % 2 !== 0;
 };
 
 isNumber.nan = isNaN;
@@ -288,8 +283,8 @@ var is = function is(value) {
     return isNumber["float"](value);
   };
 
-  fns.number.infinite = function () {
-    return isNumber.infinite(value);
+  fns.number.infinity = function () {
+    return isNumber.infinity(value);
   };
 
   fns.number["int"] = function () {
