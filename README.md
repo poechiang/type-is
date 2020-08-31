@@ -66,15 +66,15 @@ console.log(o.isEmptyObject())		// true
         * plain()
     - null()
     - number()
-    	* float()				// 1.0.6
-    	* infinite()			// 1.0.6
-    	* int()					// 1.0.6
-    	* even()				// 1.0.6
-    	* odd()					// 1.0.6
+    	* float()				<kbd>1.0.7</kbd>
+    	* infinite()			<kbd>1.0.7</kbd>
+    	* int()					<kbd>1.0.7</kbd>
+    	* even()				<kbd>1.0.7</kbd>
+    	* odd()					<kbd>1.0.7</kbd>
         * nan()
     - promise()
-    - regexp()					// 1.0.6
-    - symbol()					// 1.0.6
+    - regexp()					<kbd>1.0.7</kbd>
+    - symbol()					<kbd>1.0.7</kbd>
     - string()
         * empty()
     - undefined()
@@ -95,15 +95,15 @@ console.log(o.isEmptyObject())		// true
     - isEmptyObject()
     - isPlainObject()
     - isNumber()
-    - isFloatNumber()			// 1.0.6
-    - isInfiniteNumber()		// 1.0.6
-    - isIntNumber()				// 1.0.6
-    - isEvenIntNumber()			// 1.0.6
-    - isOddIntNumber()			// 1.0.6
+    - isFloatNumber()			<kbd>1.0.7</kbd>
+    - isInfiniteNumber()		<kbd>1.0.7</kbd>
+    - isIntNumber()				<kbd>1.0.7</kbd>
+    - isEvenIntNumber()			<kbd>1.0.7</kbd>
+    - isOddIntNumber()			<kbd>1.0.7</kbd>
     - isNaN()
     - isPromise()
-    - isRegExp()				// 1.0.6
-    - isSymbol()				// 1.0.6
+    - isRegExp()				<kbd>1.0.7</kbd>
+    - isSymbol()				<kbd>1.0.7</kbd>
     - isString()
     - isEmptyString()
     - isWindow()
