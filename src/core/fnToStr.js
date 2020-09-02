@@ -1,0 +1,1 @@
+export default fnToStr = Object.prototype.toString;

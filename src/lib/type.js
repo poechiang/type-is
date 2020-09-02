@@ -1,9 +1,4 @@
-"use strict"
-
-
-const objPoto = Object.prototype;
-const { toString: fnToStr } = objPoto;
-
+import fnToStr from '../core/fnToStr.js';
 
 /**
  * 获取给定参数的类型的字筗串表示

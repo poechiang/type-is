@@ -20,8 +20,11 @@ $ yarn add type-is.poe --D
 Introduce a global object, which can ensure that the existing type prototype is not polluted:
 
 ```js
-import {is} from 'type-is.poe';
-
+// obsoleted 
+// import {is} from 'type-is.poe';
+// >=2.0.0 
+// const is = require( 'type-is.poe' );
+import is from 'type-is.poe';
 
 let O = {a:1,b:2};
 let o = {};
@@ -36,8 +39,11 @@ console.log(is.object.empty(o))		// true
 Or use the following method to personalize the object prototype chain and use it directly through object instances:
 
 ```js
-import 'type-is.poe/dist/lib/proto';
-
+// obsoleted 
+// import 'type-is.poe/dist/lib/proto';
+// >=2.0.0 
+// require( 'type-is.poe/lib/proto' );
+import 'type-is.poe/lib/proto.js';
 
 let O = {a:1,b:2};
 let o = {};

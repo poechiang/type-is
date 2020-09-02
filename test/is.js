@@ -1,5 +1,5 @@
-require( '../dist/lib/proto.js' );
-const { is } = require( '../dist/index.js' );
+require( '../lib/proto.js' );
+const { is } = require( '../index.js' );
 
 const
     f0 = 0.,
@@ -13,6 +13,7 @@ const
     regexp = /[a-z]{4}/,
     symbol = Symbol( 45 );
 
+console.info( is )
 
 console.log( `f0's type is : ${is.type(f0)}`, f0.isFloatNumber( ) );
 console.log( `f1's type is : ${is.type(f1)}`, f1.isFloatNumber( ) );
