@@ -1,5 +1,8 @@
 "use strict"
 import extend from 'extend';
+import fnToStr from '../core/fnToStr.js';
+import getTypeRegex from '../core/getTypeRegex.js';
+
 import getType from './type.js';
 
 import isArgs from './isArgs.js';

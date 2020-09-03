@@ -1,0 +1,1 @@
+{"version":3,"names":[],"mappings":"","sources":["isRegExp.js"],"sourcesContent":["import fnToStr from '../core/fnToStr.js';\nimport getTypeRegex from '../core/getTypeRegex.js';\n\nexport default ( value ) => getTypeRegex( 'regexp' ).test( fnToStr.call( value ) );"],"file":"../lib/isRegExp.js"}

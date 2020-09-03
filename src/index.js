@@ -1,38 +1,38 @@
-const extend = require( 'extend' );
+import extend from 'extend';
 
-const getType = require( './lib/type.js' );
+import getType from './lib/type.js';
 
-const isArgs = require( './lib/isArgs.js' );
+import isArgs from './lib/isArgs.js';
 
-const isArray = require( './lib/isArray.js' );
+import isArray from './lib/isArray.js';
 
-const isBool = require( './lib/isBool.js' );
+import isBool from './lib/isBool.js';
 
-const isDate = require( './lib/isDate.js' );
+import isDate from './lib/isDate.js';
 
-const isEmpty = require( './lib/isEmpty.js' );
+import isEmpty from './lib/isEmpty.js';
 
-const isError = require( './lib/isError.js' );
+import isError from './lib/isError.js';
 
-const isFunction = require( './lib/isFunction.js' );
+import isFunction from './lib/isFunction.js';
 
-const isObject = require( './lib/isObject.js' );
+import isObject from './lib/isObject.js';
 
-const isNull = require( './lib/isNull.js' );
+import isNull from './lib/isNull.js';
 
-const isNumber = require( './lib/isNumber.js' );
+import isNumber from './lib/isNumber.js';
 
-const isPromise = require( './lib/isPromise.js' );
+import isPromise from './lib/isPromise.js';
 
-const isRegExp = require( './lib/isRegExp.js' );
+import isRegExp from './lib/isRegExp.js';
 
-const isString = require( './lib/isString.js' );
+import isString from './lib/isString.js';
 
-const isSymbol = require( './lib/isSymbol.js' );
+import isSymbol from './lib/isSymbol.js';
 
-const isUndefined = require( './lib/isUndefined.js' );
+import isUndefined from './lib/isUndefined.js';
 
-const isWindow = require( './lib/isWindow.js' );
+import isWindow from './lib/isWindow.js';
 
 const is = function ( value ) {
     const fns = {
@@ -91,5 +91,4 @@ extend( true, is, {
     widnow: isWindow,
     type: getType,
 } )
-
 module.exports = is;
