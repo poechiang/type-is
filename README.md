@@ -1,4 +1,4 @@
-# type-is.poe
+# @poech/type-is
 
 JavaScript library for type detection
 
@@ -6,12 +6,12 @@ JavaScript library for type detection
 
 npm
 ```bash
-$ npm install type-is.poe --dev-save
+$ npm install @poech/type-is --dev-save
 ```
 
 yarn
 ```bash
-$ yarn add type-is.poe --D
+$ yarn add @poech/type-is -D
 ```
 
 ## Usage
@@ -20,11 +20,9 @@ $ yarn add type-is.poe --D
 Introduce a global object, which can ensure that the existing type prototype is not polluted:
 
 ```js
-// obsoleted 
-// import {is} from 'type-is.poe';
 // >=2.0.0 
-// const is = require( 'type-is.poe' );
-import is from 'type-is.poe';
+// const is = require( '@poech/type-is' );
+import is from '@poech/type-is';
 
 let O = {a:1,b:2};
 let o = {};
@@ -39,11 +37,9 @@ console.log(is.object.empty(o))		// true
 Or use the following method to personalize the object prototype chain and use it directly through object instances:
 
 ```js
-// obsoleted 
-// import 'type-is.poe/dist/lib/proto';
 // >=2.0.0 
-// require( 'type-is.poe/lib/proto' );
-import 'type-is.poe/lib/proto.js';
+// require( '@poech/type-is/lib/proto' );
+import '@poech/type-is/lib/proto.js';
 
 let O = {a:1,b:2};
 let o = {};
@@ -67,20 +63,168 @@ console.log(o.isEmptyObject())		// true
     - empty()
     - error()
     - function()
+    - html() 
+        * a() <kbd>a</kbd>
+    	* abbr() <kbd>abbr</kbd>
+    	* address() <kbd>address</kbd>
+    	* area() <kbd>area</kbd>
+    	* article() <kbd>article</kbd>
+    	* aside() <kbd>aside</kbd>
+    	* audio() <kbd>audio</kbd>
+    	* b() <kbd>b</kbd>
+    	* base() <kbd>base</kbd>
+    	* basefont() <kbd>basefont</kbd>
+    	* bdi() <kbd>bdi</kbd>
+    	* blockquote() <kbd>blockquote</kbd>
+    	* body() <kbd>body</kbd>
+    	* br() <kbd>br</kbd>
+    	* button() <kbd>button</kbd>
+    	* canvas() <kbd>canvas</kbd>
+    	* caption() <kbd>caption</kbd>
+    	* center() <kbd>center</kbd>
+    	* cite() <kbd>cite</kbd>
+    	* code() <kbd>code</kbd>
+    	* col() <kbd>col</kbd>
+    	* colgroup() <kbd>colgroup</kbd>
+    	* command() <kbd>command</kbd>
+    	* datalist() <kbd>datalist</kbd>
+    	* dd() <kbd>dd</kbd>
+    	* del() <kbd>del</kbd>
+    	* details() <kbd>details</kbd>
+    	* dfn() <kbd>dfn</kbd>
+    	* dialog() <kbd>dialog</kbd>
+    	* dir() <kbd>dir</kbd>
+    	* div() <kbd>div</kbd>
+    	* dl() <kbd>dl</kbd>
+    	* dt() <kbd>dt</kbd>
+    	* em() <kbd>em</kbd>
+    	* embed() <kbd>embed</kbd>
+    	* fieldset() <kbd>fieldset</kbd>
+    	* figcaption() <kbd>figcaption</kbd>
+    	* figure() <kbd>figure</kbd>
+    	* font() <kbd>font</kbd>
+    	* footer() <kbd>footer</kbd>
+    	* form() <kbd>form</kbd>
+    	* frame() <kbd>frame</kbd>
+    	* frameset() <kbd>frameset</kbd>
+    	* h1() <kbd>h1</kbd>
+    	* h2() <kbd>h2</kbd>
+    	* h3() <kbd>h3</kbd>
+    	* h4() <kbd>h4</kbd>
+    	* h5() <kbd>h5</kbd>
+    	* h6() <kbd>h6</kbd>
+    	* head() <kbd>head</kbd>
+    	* heading() <kbd>heading h1 ~ h6</kbd>
+            * h1()
+            * h2()
+            * h3()
+            * h4()
+            * h5()
+            * h6()
+    	* header() <kbd>header</kbd>
+    	* hr() <kbd>hr</kbd>
+    	* html() <kbd>html</kbd>
+    	* i() <kbd>i</kbd>
+    	* iframe() <kbd>iframe</kbd>
+    	* img() <kbd>img</kbd>
+    	* input() <kbd>input</kbd>
+    		* button() <kbd>input type = button</kbd>
+    		* checkbox() <kbd>input type = checkbox</kbd>
+    		* color() <kbd>input type = color</kbd>
+    		* date() <kbd>input type = date</kbd>
+    		* datetime() <kbd>input type = datetime</kbd>
+    		* datetimeLocale() <kbd>input type = datetime-locale</kbd>
+    		* email() <kbd>input type = email</kbd>
+    		* file() <kbd>input type = file</kbd>
+    		* hidden() <kbd>input type = hidden</kbd>
+    		* image() <kbd>input type = image</kbd>
+    		* month() <kbd>input type = month</kbd>
+    		* number() <kbd>input type = number</kbd>
+    		* password() <kbd>input type = password</kbd>
+    		* radio() <kbd>input type = radio</kbd>
+    		* range() <kbd>input type = range</kbd>
+    		* reset() <kbd>input type = reset</kbd>
+    		* search() <kbd>input type = search</kbd>
+    		* submit() <kbd>input type = submit</kbd>
+    		* tel() <kbd>input type = tel</kbd>
+    	* ins() <kbd>ins</kbd>
+    	* kbd() <kbd>kbd</kbd>
+    	* keygen() <kbd>keygen</kbd>
+    	* label() <kbd>label</kbd>
+    	* legend() <kbd>legend</kbd>
+    	* li() <kbd>li</kbd>
+    	* link() <kbd>link</kbd>
+    	* main() <kbd>main</kbd>
+    	* map() <kbd>map</kbd>
+    	* mark() <kbd>mark</kbd>
+    	* marquee() <kbd>marquee</kbd>
+    	* menu() <kbd>menu</kbd>
+    	* menuitem() <kbd>menuitem</kbd> // firefox
+    	* meta() <kbd>meta</kbd>
+    	* meter() <kbd>meter</kbd>
+    	* nav() <kbd>nav</kbd>
+    	* noframes() <kbd>noframes</kbd>
+    	* noscript() <kbd>noscript</kbd>
+    	* object() <kbd>object</kbd>
+    	* ol() <kbd>ol</kbd>
+    	* optgroup() <kbd>optgroup</kbd>
+    	* option() <kbd>option</kbd>
+    	* output() <kbd>output</kbd>
+    	* p() <kbd>p</kbd>
+    	* param() <kbd>param</kbd>
+    	* picture() <kbd>picture</kbd>
+    	* pre() <kbd>pre</kbd>
+    	* progress() <kbd>progress</kbd>
+    	* q() <kbd>q</kbd>
+    	* rp() <kbd>rp</kbd>
+    	* rt() <kbd>rt</kbd>
+    	* ruby() <kbd>ruby</kbd>
+    	* samp() <kbd>samp</kbd>
+    	* script() <kbd>script</kbd>
+    	* section() <kbd>section</kbd>
+    	* select() <kbd>select</kbd>
+    	* small() <kbd>small</kbd>
+    	* source() <kbd>source</kbd>
+    	* span() <kbd>span</kbd>
+    	* strike() <kbd>strike</kbd>
+    	* strong() <kbd>strong</kbd>
+    	* style() <kbd>style</kbd>
+    	* sub() <kbd>sub</kbd>
+    	* summary() <kbd>summary</kbd>
+    	* sup() <kbd>sup</kbd>
+    	* table() <kbd>table</kbd>
+			* section() <kbd>table</kbd>
+				* thead() <kbd>table</kbd>
+				* tbody() <kbd>table</kbd>
+				* tfoot() <kbd>table</kbd>
+    	* tcell() <kbd>td & th</kbd>
+            * th() <kbd>table th</kbd>
+            * td() <kbd>table td</kbd>
+    	* textarea() <kbd>textarea</kbd>
+    	* time() <kbd>time</kbd>
+    	* title() <kbd>title</kbd>
+    	* tr() <kbd>tr</kbd>
+    	* track() <kbd>track</kbd>
+    	* tt() <kbd>tt</kbd>
+    	* u() <kbd>u</kbd>
+    	* ul() <kbd>ul</kbd>
+    	* var() <kbd>var</kbd>
+    	* video() <kbd>video</kbd>
+        * wbr <kbd>wbr</kbd>
     - object()
         * empty()
         * plain()
     - null()
     - number()
-    	* float()  <kbd>1.0.7</kbd>
-    	* infinite()  <kbd>1.0.7</kbd>
-    	* int()  <kbd>1.0.7</kbd>
-    	* even()  <kbd>1.0.7</kbd>
-    	* odd()  <kbd>1.0.7</kbd>
+    	* float() 
+    	* infinite()
+    	* int() 
+    	* even() 
+    	* odd()
         * nan()
     - promise()
-    - regexp()  <kbd>1.0.7</kbd>
-    - symbol()  <kbd>1.0.7</kbd>
+    - regexp() 
+    - symbol()
     - string()
         * empty()
     - undefined()
@@ -97,124 +241,177 @@ console.log(o.isEmptyObject())		// true
     - isEmpty()
     - isError()
     - isFunction()
+    - isHTMLElement()
+    - isHTMLAnchorElement()Element()
+    - isHTMLAbbrElement()
+    - isHTMLAddressElement()
+    - isHTMLAreaElement()
+    - isHTMLArticleElement()
+    - isHTMLAsideElement()
+    - isHTMLAudioElement()
+    - isHTMLBoldElement()
+    - isHTMLBaseElement()
+    - isHTMLBasefontElement()
+    - isHTMLBdiElement()
+    - isHTMLBlockquoteElement()
+    - isHTMLBodyElement()
+    - isHTMLBRElement()
+    - isHTMLButtonElement()
+    - isHTMLCanvasElement()
+    - isHTMLTableCaptionElement()
+    - isHTMLCenterElement()
+    - isHTMLCiteElement()
+    - isHTMLCodeElement()
+    - isHTMLTableColElement()
+    - isHTMLColgroupElement()
+    - isHTMLCommandElement()
+    - isHTMLDataListElement()
+    - isHTMLDDElement()
+    - isHTMLModElement()
+    - isHTMLDetailsElement()
+    - isHTMLDfnElement()
+    - isHTMLDialogElement()
+    - isHTMLDirectoryElement()
+    - isHTMLDivElement()
+    - isHTMLDListElement()
+    - isHTMLDTElement()
+    - isHTMLEMElement()
+    - isHTMLEmbedElement()
+    - isHTMLFieldsetElement()
+    - isHTMLFigcaptionElement()
+    - isHTMLFigureElement()
+    - isHTMLFontElement()
+    - isHTMLFooterElement()
+    - isHTMLFormElement()
+    - isHTMLFrameElement()
+    - isHTMLFramesetElement()
+    - isHTMLHeadElement()
+    - isHTMLHeadingElement()
+    - isHTMLHeadingH1Element()
+    - isHTMLHeadingH2Element()
+    - isHTMLHeadingH3Element()
+    - isHTMLHeadingH4Element()
+    - isHTMLHeadingH5Element()
+    - isHTMLHeadingH6Element()
+    - isHTMLHeaderElement()
+    - isHTMLHRElement()
+    - isHTMLHtmlElement()
+    - isHTMLItalyElement()
+    - isHTMLIFrameElement()
+    - isHTMLImageElement()
+    - isHTMLInputElement()
+    - isHTMLButtonInputElement()
+    - isHTMLCheckboxInputElement()
+    - isHTMLColorInputElement()
+    - isHTMLDateInputElement()
+    - isHTMLDatetimeInputElement()
+    - isHTMLDatetimeLocaleInputElement()
+    - isHTMLEmailFileInputElement()
+    - isHTMLHiddenInputElement()
+    - isHTMLImageInputElement()
+    - isHTMLMonthInputElement()
+    - isHTMLNumberInputElement()
+    - isHTMLPasswordInputElement()
+    - isHTMLRadioInputElement()
+    - isHTMLRangeInputElement()
+    - isHTMLResetInputElement()
+    - isHTMLSearchInputElement()
+    - isHTMLSubmitInputElement()
+    - isHTMLTelInputElement()
+    - isHTMLInsElement()
+    - isHTMLKbdElement()
+    - isHTMLKeygenElement()
+    - isHTMLLabelElement()
+    - isHTMLLegendElement()
+    - isHTMLLIElement()
+    - isHTMLLinkElement()
+    - isHTMLMainElement()
+    - isHTMLMapElement()
+    - isHTMLMarkElement()
+    - isHTMLMarqueeElement()
+    - isHTMLMenuElement()
+    - isHTMLMenuItemElement()
+    - isHTMLMataElement()
+    - isHTMLMeterElement()
+    - isHTMLNavElement()
+    - isHTMLNoframesElement()
+    - isHTMLNoscriptElement()
+    - isHTMLObjectElement()
+    - isHTMLOListElement()
+    - isHTMLOptGroupElement()
+    - isHTMLOptionElement()
+    - isHTMLOputputElement()
+    - isHTMLParagraphElement()
+    - isHTMLParamElement()
+    - isHTMLPictureElement()
+    - isHTMLPreElement()
+    - isHTMLProgressElement()
+    - isHTMLQuoteElement()
+    - isHTMLRPElement()
+    - isHTMLRTElement()
+    - isHTMLRubyElement()
+    - isHTMLSampElement()
+    - isHTMLScriptElement()
+    - isHTMLSectionElement()
+    - isHTMLSelectElement()
+    - isHTMLSmallElement()
+    - isHTMLSourceElement()
+    - isHTMLSpanElement()
+    - isHTMLStrikeElement()
+    - isHTMLStrongElement()
+    - isHTMLStyleElement()
+    - isHTMLSubElement()
+    - isHTMLSummaryElement()
+    - isHTMLSupElement()
+    - isHTMLTableElement()
+    - isHTMLTableSectionElement()
+    - isHTMLTableBodyElement()
+    - isHTMLTableFootElement()
+    - isHTMLTableHeadElement()
+    - isHTMLTableCellElement()
+    - isHTMLTableTHCellElement()
+    - isHTMLTableTDCellElement()
+    - isHTMLTextAreaElement()
+    - isHTMLTimeElement()
+    - isHTMLTitleElement()
+    - isHTMLTableRowElement()
+    - isHTMLTrackElement()
+    - isHTMLTTElement()
+    - isHTMLUnderLineElement()
+    - isHTMLUListElement()
+    - isHTMLVarElement()
+    - isHTMLVideoElement()
+    - isHTMLSbrElement()
+
+
     - isObject()
     - isEmptyObject()
     - isPlainObject()
     - isNumber()
-    - isFloatNumber()  <kbd>1.0.7</kbd>
-    - isIntNumber()  <kbd>1.0.7</kbd>
-    - isEvenIntNumber()  <kbd>1.0.7</kbd>
-    - isOddIntNumber()  <kbd>1.0.7</kbd>
+    - isFloatNumber()
+    - isIntNumber()
+    - isEvenIntNumber()
+    - isOddIntNumber()
     - isPromise()
-    - isRegExp()  <kbd>1.0.7</kbd>
-    - isSymbol()  <kbd>1.0.7</kbd>
+    - isRegExp()
+    - isSymbol()
     - isString()
     - isEmptyString()
     - isWindow()
+    - isScreen()
+    - isLocation()
+    - isHistory()
+    - isDocument()
+    - isNavigator()
 
 
+## Logs
 
+### 2.0.1
 
-## Test 
++ dom & bom
++ Gulp + ES6
 
+### <=1.x (type-is.poe)
 
-### 1.0.8
-```js
-require( '../dist/lib/proto.js' );
-const { is } = require( '../dist/index.js' );
-
-const
-    f0 = 0.,
-    f1 = .0,
-    f2 = 1.2,
-    infinity = Infinity,
-    i = 0,
-    e = 1,
-    o = 4,
-    nan = NaN,
-    regexp = /[a-z]{4}/,
-    symbol = Symbol( 45 );
-
-
-console.log( `f0's type is : ${is.type(f0)}`, f0.isFloatNumber( ) );
-console.log( `f1's type is : ${is.type(f1)}`, f1.isFloatNumber( ) );
-console.log( `f2's type is : ${is.type(f2)}`, f2.isFloatNumber( ) );
-console.log( `infinity's type is : ${is.type(infinity)}`, is.number.infinity( infinity ) );
-console.log( `i's type is : ${is.type(i)}`, i.isIntNumber( ) );
-console.log( `e's type is : ${is.type(e)}`, is.number.odd( e ) );
-console.log( `o's type is : ${is.type(o)}`, is.number.even( o ) );
-console.log( `nan's type is : ${is.type(nan)}`, is.number.nan( nan ) );
-console.log( `regexp's type is : ${is.type(regexp)}`, is.regexp( regexp ) );
-console.log( `symbol's type is : ${is.type(symbol)}`, is.symbol( symbol ) );
-````
-
-
-### 1.0.4
-```js
-require('../dist/lib/proto.js');
-const { is } = require( '../dist/index.js' );
-
-const
-    o = {},
-    oo = { x: 1, y: 2, z: 3 },
-    aa = [ 1, 2, 3 ],
-    a = [ ],
-    z = 0,
-    n = 4,
-    t = true,
-    f = false,
-    ss = "abc",
-    s = "",
-    fn = function ( ) {
-        console.log( arguments, `arguments's type is Arguments: ${is(arguments).args()} and it is empty: ${is(arguments).args.empty()}` )
-    },
-    nil = null;
-
-let u;
-
-
-console.log( `o's type is : ${is.type(o)}` );
-console.log( `oo's type is : ${is.type(oo)}` );
-console.log( `aa's type is : ${is.type(aa)}` );
-console.log( `a's type is : ${is.type(a)}` );
-console.log( `z's type is : ${is.type(z)}` );
-console.log( `n's type is : ${is.type(n)}` );
-console.log( `t's type is : ${is.type(t)}` );
-console.log( `f's type is : ${is.type(f)}` );
-console.log( `ss's type is : ${is.type(ss)}` );
-console.log( `s's type is : ${is.type(s)}` );
-console.log( `fn's type is : ${is.type(fn)}` );
-console.log( `nil's type is : ${is.type(nil)}` );
-console.log( `u's type is : ${is.type(u)}` );
-
-
-console.log( `o's type is Object: ${o.isObject()} and it is plain: ${o.isPlainObject()} and it is empty: ${o.isEmptyObject()}` );
-console.log( `oo's type is Object: ${oo.isObject()} and it is plain: ${oo.isPlainObject()} and it is empty: ${oo.isEmptyObject()}` );
-console.log( `aa's type is Array: ${aa.isArray()} and it is empty: ${aa.isEmptyArray()}` );
-console.log( `a's type is Array: ${a.isArray()} and it is empty: ${a.isEmptyArray()}` );
-console.log( `z's type is Number: ${z.isNumber()} and it is empty: ${z.isEmpty()}` );
-console.log( `n's type is Number: ${n.isNumber()} and it is empty: ${n.isEmpty()}` );
-console.log( `t's type is Boolean: ${t.isBool()} and it is empty: ${t.isEmpty()}` );
-console.log( `f's type is Boolean: ${f.isBool()} and it is empty: ${f.isEmpty()}` );
-console.log( `ss's type is String: ${ss.isString()} and it is empty: ${ss.isEmptyString()}` );
-console.log( `s's type is String: ${s.isString()} and it is empty: ${s.isEmptyString()}` );
-console.log( `fn's type is Function: ${fn.isFunction()} and it is empty: ${fn.isEmpty()}` );
-
-
-console.log( `o's type is Object: ${is(o).object()} and it is plain: ${is(o).object.plain()} and it is empty: ${is(o).object.empty()}` );
-console.log( `oo's type is Object: ${is(oo).object()} and it is plain: ${is(oo).object.plain()} and it is empty: ${is(oo).object.empty()}` );
-console.log( `aa's type is Array: ${is(aa).array()} and it is empty: ${is(aa).array.empty()}` );
-console.log( `a's type is Array: ${is(a).array()} and it is empty: ${is(a).array.empty()}` );
-console.log( `z's type is Number: ${is(z).number()} and it is empty: ${is(z).empty()}` );
-console.log( `n's type is Number: ${is(n).number()} and it is empty: ${is(n).empty()}` );
-console.log( `t's type is Boolean: ${is(t).bool()} and it is empty: ${is(t).empty()}` );
-console.log( `f's type is Boolean: ${is(f).bool()} and it is empty: ${is(f).empty()}` );
-console.log( `ss's type is String: ${is(ss).string()} and it is empty: ${is(ss).string.empty()}` );
-console.log( `s's type is String: ${is(s).string()} and it is empty: ${is(s).string.empty()}` );
-console.log( `fn's type is Function: ${is(fn).function()} and it is empty: ${is(fn).empty()}` );
-fn( )
-fn( 1, 2, 3 )
-
-console.log( `nil's type is Null: ${is(nil).null()} and it is empty: ${is(nil).empty()}` );
-console.log( `u's type is Undefined: ${is(u).undefined()} and it is empty: ${is(u).empty()}` );
-````
+deprecated type-is.poe@<=1.1.6: If using 2.x branch, please change the name of the package to @poech/type-is and it's version to at least 2.0.1

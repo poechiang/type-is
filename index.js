@@ -1,5 +1,7 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 var _extend = _interopRequireDefault(require("extend"));
 
 var _type = _interopRequireDefault(require("./lib/type.js"));
@@ -34,9 +36,9 @@ var _isSymbol = _interopRequireDefault(require("./lib/isSymbol.js"));
 
 var _isUndefined = _interopRequireDefault(require("./lib/isUndefined.js"));
 
-var _isWindow = _interopRequireDefault(require("./lib/isWindow.js"));
+var _isBom = _interopRequireDefault(require("./lib/isBom.js"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+var _isDom = require("./lib/isDom.js");
 
 var is = function is(value) {
   var fns = {
@@ -86,10 +88,16 @@ var is = function is(value) {
       return (0, _isUndefined["default"])(value);
     },
     window: function window() {
-      return (0, _isWindow["default"])(value);
+      return (0, _isBom["default"])(value);
     },
     type: function type() {
       return (0, _type["default"])(value);
+    },
+    xml: function xml() {
+      return (0, _isDom.xml)(value);
+    },
+    html: function html() {
+      return (0, _isDom.html)(value);
     }
   };
 
@@ -141,6 +149,55 @@ var is = function is(value) {
     return _isString["default"].empty(value);
   };
 
+  fns.window.screen = function () {
+    return _isBom["default"].screen(value);
+  };
+
+  fns.window.location = function () {
+    return _isBom["default"].location(value);
+  };
+
+  fns.window.navigator = function () {
+    return _isBom["default"].navigator(value);
+  };
+
+  fns.window.history = function () {
+    return _isBom["default"].history(value);
+  };
+
+  fns.window.document = function () {
+    return _isBom["default"].document(value);
+  };
+
+  fns.xml.document = function () {
+    return _isDom.xml.document(value);
+  };
+
+  ['a', 'abbr', 'address', 'area', 'article', 'aside', 'audio', 'b', 'base', 'basefont', 'bdi', 'blockquote', 'body', 'br', 'button', 'canvas', 'caption', 'center', 'cite', 'code', 'col', 'colgroup', 'command', 'datalist', 'dd', 'del', 'details', 'dfn', 'dialog', 'dir', 'div', 'dl', 'dt', 'em', 'embed', 'fieldset', 'figcaption', 'figure', 'font', 'footer', 'form', 'frame', 'frameset', 'heading', 'head', 'header', 'hr', 'html', 'i', 'iframe', 'img', 'input', 'ins', 'kbd', 'keygen', 'label', 'legend', 'li', 'link', 'main', 'map', 'mark', 'marquee', 'menu', 'menuitem', 'meta', 'meter', 'nav', 'noframes', 'noscript', 'object', 'ol', 'optgroup', 'option', 'output', 'p', 'param', 'picture', 'pre', 'progress', 'q', 'rp', 'rt', 'ruby', 's', 'samp', 'script', 'section', 'select', 'small', 'source', 'span', 'strike', 'strong', 'style', 'sub', 'summary', 'sup', 'table', 'td', 'textarea', 'time', 'title', 'tr', 'track', 'tt', 'u', 'ul', 'var', 'video', 'wbr'].map(function (m) {
+    fns.html[m] = function () {
+      return _isDom.html[m](value);
+    };
+  })[('h1', 'h2', 'h3', 'h4', 'h5', 'h6')].map(function (m) {
+    fns.html.heading[m] = _isDom.html.heading[m](value);
+  })[('button', 'checkbox', 'color', 'date', 'datetime', 'datetimeLocale', 'email', 'file', 'hidden', 'image', 'month', 'number', 'password', 'radio', 'range', 'reset', 'search', 'search', 'submit', 'tel', 'date')].map(function (m) {
+    fns.html.input[m] = _isDom.html.input[m](value);
+  });
+
+  fns.html.table.section = function () {
+    return _isDom.html.table.section(value);
+  };
+
+  ['thead', 'tbody', 'tfoot'].map(function (m) {
+    fns.html.table.section[m] = _isDom.html.table.section[m](value);
+  });
+  ['head', 'cell'].map(function (m) {
+    fns.html.td[m] = _isDom.html.td[m](value);
+  });
+
+  fns.html.document = function () {
+    return _isDom.html.document(value);
+  };
+
   return fns;
 };
 
@@ -160,7 +217,9 @@ var is = function is(value) {
   symbol: _isSymbol["default"],
   string: _isString["default"],
   undefined: _isUndefined["default"],
-  widnow: _isWindow["default"],
-  type: _type["default"]
+  widnow: _isBom["default"],
+  type: _type["default"],
+  html: _isDom.html,
+  xml: _isDom.xml
 });
 module.exports = is;
