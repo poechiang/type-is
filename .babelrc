@@ -1,11 +1,4 @@
 {
-    "presets": [
-        ["@babel/preset-env",
-        {
-            "loose": true,
-            "modules": false
-        }]
-
-    ],
-    "plugins": ["@babel/plugin-transform-runtime", "@babel/plugin-transform-modules-commonjs", "@babel/plugin-proposal-export-default-from", "@babel/plugin-transform-strict-mode"]
+  "presets": ["@babel/preset-env"],
+  "plugins": []
 }

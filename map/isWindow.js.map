@@ -1,1 +1,0 @@
-{"version":3,"names":[],"mappings":"","sources":["isWindow.js"],"sourcesContent":["export default ( value ) => !isNull( value ) && obj === obj.window;"],"file":"../lib/isWindow.js"}

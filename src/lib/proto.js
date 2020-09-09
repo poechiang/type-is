@@ -1,458 +1,441 @@
-"use strict"
+/* eslint no-extend-native: ["error", { "exceptions": ["Object"] }] */
 import extend from 'extend';
-import fnToStr from '../core/fnToStr.js';
-import getTypeRegex from '../core/getTypeRegex.js';
+import fnToStr from '../core/fnToStr';
+import getTypeRegex from '../core/getTypeRegex';
 
-import getType from './type.js';
+import getType from './type';
 
-import isArgs from './isArgs.js';
+import isArgs from './isArgs';
 
-import isArray from './isArray.js';
+import isArray from './isArray';
 
-import isBool from './isBool.js';
+import isBool from './isBool';
 
-import isDate from './isDate.js';
+import isDate from './isDate';
 
-import isEmpty from './isEmpty.js';
+import isEmpty from './isEmpty';
 
-import isError from './isError.js';
+import isError from './isError';
 
-import isFunction from './isFunction.js';
+import isFunction from './isFunction';
 
-import isObject from './isObject.js';
+import isObject from './isObject';
 
-import isNumber from './isNumber.js';
+import isNumber from './isNumber';
 
-import isPromise from './isPromise.js';
+import isPromise from './isPromise';
 
-import isRegExp from './isRegExp.js';
+import isRegExp from './isRegExp';
 
-import isString from './isString.js';
+import isString from './isString';
 
-import isSymbol from './isSymbol.js';
+import isSymbol from './isSymbol';
 
-import isWindow from './isBom.js';
+import isWindow from './isBom';
 
-import { html, xml } from './isDom.js'
+import { html, xml } from './isDom';
 
-const extendObj = function ( ...objects ) {
-    const [ deep, ...list ] = objects;
-    if ( typeof deep === 'object' ) {
-        return extend( this, deep, ...list )
-    } else {
-        return extend( deep, this, ...list )
+const extendObj = function extendObj(...objects) {
+  const [deep, ...list] = objects;
+  if (typeof deep === 'object') {
+    return extend(this, deep, ...list);
+  }
+  return extend(deep, this, ...list);
+};
+
+if (!Object.prototype.extend) {
+  Object.defineProperty(Object.prototype, 'extend', { value: extendObj });
+}
+
+if (!Object.extend) {
+  Object.defineProperty(Object, 'extend', { value: extendObj });
+}
+if (!Object.type) {
+  Object.defineProperty(Object, 'type', {
+    value() {
+      return getType(this);
     }
+  });
 }
 
-if ( !Object.prototype.extend ) {
-    Object.defineProperty( Object.prototype, 'extend', { value: extendObj } )
-}
-
-if ( !Object.extend ) {
-    Object.defineProperty( Object, 'extend', { value: extendObj } )
-}
-if ( !Object.type ) {
-    Object.defineProperty( Object, 'type', {
-        value: function ( ) {
-            return getType( this );
-        }
-    } )
-}
-
-if ( !Object.prototype.is ) {
-    Object.defineProperty( Object.prototype, 'is', {
-        value: function ( type ) {
-            return getTypeRegex( type ).test( fnToStr.call( this ) );
-        }
-    } )
-
-    Object.defineProperty( Object.prototype, 'isArgs', {
-        value: function ( ) {
-            return isArgs( this );
-        }
-    } )
-
-    Object.defineProperty( Object.prototype, 'isDate', {
-        value: function ( ) {
-            return isDate( this );
-        }
-    } )
-
-    Object.defineProperty( Object.prototype, 'isEmptyArgs', {
-        value: function ( ) {
-            return isArgs.empty( this );
-        }
-    } )
-
-    Object.defineProperty( Object.prototype, 'isArray', {
-        value: function ( ) {
-            return isArray( this );
-        }
-    } )
-
-    Object.defineProperty( Object.prototype, 'isEmptyArray', {
-        value: function ( ) {
-            return isArray.empty( this );
-        }
-    } )
-
-    Object.defineProperty( Object.prototype, 'likeArray', {
-        value: function ( ) {
-            return isArray.like( this );
-        }
-    } )
-
-    Object.defineProperty( Object.prototype, 'isBool', {
-        value: function ( ) {
-            return isBool( this );
-        }
-    } )
-
-    Object.defineProperty( Object.prototype, 'isEmpty', {
-        value: function ( ) {
-            return isEmpty( this );
-        }
-    } )
-
-    Object.defineProperty( Object.prototype, 'isError', {
-        value: function ( ) {
-            return isError( this );
-        }
-    } )
-
-    Object.defineProperty( Object.prototype, 'isFunction', {
-        value: function ( ) {
-            return isFunction( this );
-        }
-    } )
-
-    Object.defineProperty( Object.prototype, 'isObject', {
-        value: function ( ) {
-            return isObject( this );
-        }
-    } )
-
-    Object.defineProperty( Object.prototype, 'isEmptyObject', {
-        value: function ( ) {
-            return isObject.empty( this );
-        }
-    } )
-
-
-    Object.defineProperty( Object.prototype, 'isPromise', {
-        value: function ( ) {
-            return isPromise( this );
-        }
-    } )
-
-    Object.defineProperty( Object.prototype, 'isPlainObject', {
-        value: function ( ) {
-            return isObject.plain( this );
-        }
-    } )
-
-    Object.defineProperty( Object.prototype, 'isNumber', {
-        value: function ( ) {
-            return isNumber( this );
-        }
-    } )
-
-    Object.defineProperty( Object.prototype, 'isFloatNumber', {
-        value: function ( ) {
-            return isNumber.float( this );
-        }
-    } )
-
-    Object.defineProperty( Object.prototype, 'isIntNumber', {
-        value: function ( ) {
-            return isNumber.int( this );
-        }
-    } )
-
-    Object.defineProperty( Object.prototype, 'isEvenIntNumber', {
-        value: function ( ) {
-            return isNumber.even( this );
-        }
-    } )
-
-    Object.defineProperty( Object.prototype, 'isOddIntNumber', {
-        value: function ( ) {
-            return isNumber.odd( this );
-        }
-    } )
-
-
-    Object.defineProperty( Object.prototype, 'isRegExp', {
-        value: function ( ) {
-            return isRegExp( this );
-        }
-    } )
-
-    Object.defineProperty( Object.prototype, 'isSymbol', {
-        value: function ( ) {
-            return isSymbol( this );
-        }
-    } )
-
-    Object.defineProperty( Object.prototype, 'isString', {
-        value: function ( ) {
-            return isString( this );
-        }
-    } )
-
-    Object.defineProperty( Object.prototype, 'isEmptyString', {
-        value: function ( ) {
-            return isString.empty( this );
-        }
-    } )
-
-    Object.defineProperty( Object.prototype, 'isWindow', {
-        value: function ( ) {
-            return isWindow( this );
-        }
-    } )
-
-    Object.defineProperty( Object.prototype, 'isLocation', {
-        value: function ( ) {
-            return isWindow.location( this );
-        }
-    } )
-
-    Object.defineProperty( Object.prototype, 'isHistory', {
-        value: function ( ) {
-            return isWindow.history( this );
-        }
-    } )
-
-    Object.defineProperty( Object.prototype, 'isScreen', {
-        value: function ( ) {
-            return isWindow.screen( this );
-        }
-    } )
-
-    Object.defineProperty( Object.prototype, 'isNavigator', {
-        value: function ( ) {
-            return isWindow.navigator( this );
-        }
-    } )
-    Object.defineProperty( Object.prototype, 'isHTMLDocument', {
-        value: function ( ) {
-            return isWindow.htmlDocument( this );
-        }
-    } )
-
-    Object.defineProperty( Object.prototype, 'isXMLDocument', {
-        value: function ( ) {
-            return isWindow.xmlDocument( this )
-        }
-    } )
-    Object.defineProperty( Object.prototype, 'isXMLElement', {
-        value: function ( ) {
-            return xml( this )
-        }
-    } )
-    Object.defineProperty( Object.prototype, 'isHTMLDocument', {
-        value: function ( ) {
-            return html.document( this )
-        }
-    } )
-    Object.defineProperty( Object.prototype, 'isHTMLElement', {
-        value: function ( ) {
-            return html( this )
-        }
-    } )
-
-
-
-
-
-    const HtmlNameTypeMap = {
-        a: 'Anchor',
-        abbr: '',
-        address: '',
-        area: 'Area',
-        article: '',
-        aside: '',
-        audio: 'Audio',
-        b: 'Bold',
-        base: 'Base',
-        basefont: '',
-        bdi: '',
-        blockquote: '',
-        body: 'Body',
-        br: 'BR',
-        button: 'Button',
-        canvas: 'Canvas',
-        caption: 'TableCaption',
-        center: '',
-        cite: '',
-        code: '',
-        col: 'TableCol',
-        colgroup: '',
-        command: '',
-        datalist: 'DataList',
-        dd: 'DD',
-        del: 'Mod',
-        details: 'Details',
-        dfn: '',
-        dialog: 'Dialog',
-        dir: 'Directory',
-        div: 'Div',
-        dl: 'DList',
-        dt: 'DT',
-        em: 'EM',
-        embed: 'Embed',
-        fieldset: 'fieldset',
-        figcaption: '',
-        figure: '',
-        font: 'Font',
-        footer: 'Footer',
-        form: 'Form',
-        frame: 'Frame',
-        frameset: 'Frameset',
-        head: 'Head',
-        heading: 'Heading',
-        header: '',
-        hr: 'HR',
-        html: 'Html',
-        i: 'Italy',
-        iframe: 'IFrame',
-        img: 'Image',
-        input: 'Image',
-        ins: '',
-        kbd: '',
-        keygen: '',
-        label: 'Label',
-        legend: 'Legend',
-        li: 'LI',
-        link: 'Link',
-        main: '',
-        map: 'Map',
-        mark: 'Mark',
-        marquee: 'Marquee',
-        menu: 'Menu',
-        menuitem: 'MenuItem', // firefox
-        meta: 'Mata',
-        meter: 'Meter',
-        nav: '',
-        noframes: '',
-        noscript: '',
-        object: 'Object',
-        ol: 'OList',
-        optgroup: 'OptGroup',
-        option: 'Option',
-        output: 'Oputput',
-        p: 'Paragraph',
-        param: 'Param',
-        picture: 'Picture',
-        pre: 'Pre',
-        progress: 'Progress',
-        q: 'Quote',
-        rp: 'RP',
-        rt: 'RT',
-        ruby: '',
-        samp: '',
-        script: 'Script',
-        section: '',
-        select: 'Select',
-        small: '',
-        source: 'Source',
-        span: 'Span',
-        strike: '',
-        strong: '',
-        style: 'Style',
-        sub: '',
-        summary: '',
-        sup: '',
-        table: 'Table',
-        tcell: 'TableCell',
-        textarea: 'TextArea',
-        time: 'Time',
-        title: 'Title',
-        tr: 'TableRow',
-        track: 'Track',
-        tt: 'TT',
-        u: 'UnderLine',
-        ul: 'UList',
-        var: '',
-        video: 'Video',
-        wbr: ''
-    };
-    for ( const [ tag, type ] of Object.entries( HtmlNameTypeMap ) ) {
-        let typeName = type
-        if ( !type ) {
-            let [ first, ...others ] = tag;
-            typeName = first + others.join( '' );
-
-        }
-        Object.defineProperty( Object.prototype, `isHTML${typeName}Element`, {
-            value: function ( ) {
-                return html[ tag ]( this );
-            }
-        } );
+if (!Object.prototype.is) {
+  Object.defineProperty(Object.prototype, 'is', {
+    value(type) {
+      return getTypeRegex(type).test(fnToStr.call(this));
     }
-    [ 'h1', 'h2', 'h3', 'h4', 'h5', 'h6' ].map( ( item ) => {
+  });
 
-        Object.defineProperty( Object.prototype, `isHTML${item.toUpperCase()}HeadingElement`, {
-            value: function ( ) {
-                return html.heading[ tag ]( this );
-            }
-        } );
-    } );
+  Object.defineProperty(Object.prototype, 'isArgs', {
+    value() {
+      return isArgs(this);
+    }
+  });
 
-    [ 'button', 'checkbox', 'color', 'date', 'datetime', 'datetimeLocale', 'email', 'file', 'hidden', 'image', 'month', 'number', 'password', 'radio', 'range', 'reset', 'search', 'submit', 'tel' ].map( ( item ) => {
+  Object.defineProperty(Object.prototype, 'isDate', {
+    value() {
+      return isDate(this);
+    }
+  });
 
-        const [ first, ...others ] = item;
-        item = first + others.join( '' );
-        Object.defineProperty( Object.prototype, `isHTML${item}InputElement`, {
-            value: function ( ) {
-                return html.input[ item ]( this );
-            }
-        } );
-    } );
+  Object.defineProperty(Object.prototype, 'isEmptyArgs', {
+    value() {
+      return isArgs.empty(this);
+    }
+  });
 
-    Object.defineProperty( Object.prototype, `isHTMLTableSectionElement`, {
-        value: function ( ) {
-            return html.table.section( this );
-        }
-    } );
-    Object.defineProperty( Object.prototype, `isHTMLTableHeadElement`, {
-        value: function ( ) {
-            return html.table.section.thead( this );
-        }
-    } );
-    Object.defineProperty( Object.prototype, `isHTMLTableBodyElement`, {
-        value: function ( ) {
-            return html.table.tbody( this );
-        }
-    } );
-    Object.defineProperty( Object.prototype, `isHTMLTableFootElement`, {
-        value: function ( ) {
-            return html.table.section.tfoot( this );
-        }
-    } );
-    Object.defineProperty( Object.prototype, `isHTMLTableCellElement`, {
-        value: function ( ) {
-            return html.tcell( this );
-        }
-    } );
-    Object.defineProperty( Object.prototype, `isHTMLTableTHCellElement`, {
-        value: function ( ) {
-            return html.tcell.th( this );
-        }
-    } );
-    Object.defineProperty( Object.prototype, `isHTMLTableTDCellElement`, {
-        value: function ( ) {
-            return html.tcell.td( this );
-        }
-    } );
+  Object.defineProperty(Object.prototype, 'isArray', {
+    value() {
+      return isArray(this);
+    }
+  });
 
+  Object.defineProperty(Object.prototype, 'isEmptyArray', {
+    value() {
+      return isArray.empty(this);
+    }
+  });
 
+  Object.defineProperty(Object.prototype, 'likeArray', {
+    value() {
+      return isArray.like(this);
+    }
+  });
 
+  Object.defineProperty(Object.prototype, 'isBool', {
+    value() {
+      return isBool(this);
+    }
+  });
 
+  Object.defineProperty(Object.prototype, 'isEmpty', {
+    value() {
+      return isEmpty(this);
+    }
+  });
 
+  Object.defineProperty(Object.prototype, 'isError', {
+    value() {
+      return isError(this);
+    }
+  });
 
+  Object.defineProperty(Object.prototype, 'isFunction', {
+    value() {
+      return isFunction(this);
+    }
+  });
 
+  Object.defineProperty(Object.prototype, 'isObject', {
+    value() {
+      return isObject(this);
+    }
+  });
 
+  Object.defineProperty(Object.prototype, 'isEmptyObject', {
+    value() {
+      return isObject.empty(this);
+    }
+  });
 
+  Object.defineProperty(Object.prototype, 'isPromise', {
+    value() {
+      return isPromise(this);
+    }
+  });
+
+  Object.defineProperty(Object.prototype, 'isPlainObject', {
+    value() {
+      return isObject.plain(this);
+    }
+  });
+
+  Object.defineProperty(Object.prototype, 'isNumber', {
+    value() {
+      return isNumber(this);
+    }
+  });
+
+  Object.defineProperty(Object.prototype, 'isFloatNumber', {
+    value() {
+      return isNumber.float(this);
+    }
+  });
+
+  Object.defineProperty(Object.prototype, 'isIntNumber', {
+    value() {
+      return isNumber.int(this);
+    }
+  });
+
+  Object.defineProperty(Object.prototype, 'isEvenIntNumber', {
+    value() {
+      return isNumber.even(this);
+    }
+  });
+
+  Object.defineProperty(Object.prototype, 'isOddIntNumber', {
+    value() {
+      return isNumber.odd(this);
+    }
+  });
+
+  Object.defineProperty(Object.prototype, 'isRegExp', {
+    value() {
+      return isRegExp(this);
+    }
+  });
+
+  Object.defineProperty(Object.prototype, 'isSymbol', {
+    value() {
+      return isSymbol(this);
+    }
+  });
+
+  Object.defineProperty(Object.prototype, 'isString', {
+    value() {
+      return isString(this);
+    }
+  });
+
+  Object.defineProperty(Object.prototype, 'isEmptyString', {
+    value() {
+      return isString.empty(this);
+    }
+  });
+
+  Object.defineProperty(Object.prototype, 'isWindow', {
+    value() {
+      return isWindow(this);
+    }
+  });
+
+  Object.defineProperty(Object.prototype, 'isLocation', {
+    value() {
+      return isWindow.location(this);
+    }
+  });
+
+  Object.defineProperty(Object.prototype, 'isHistory', {
+    value() {
+      return isWindow.history(this);
+    }
+  });
+
+  Object.defineProperty(Object.prototype, 'isScreen', {
+    value() {
+      return isWindow.screen(this);
+    }
+  });
+
+  Object.defineProperty(Object.prototype, 'isNavigator', {
+    value() {
+      return isWindow.navigator(this);
+    }
+  });
+  Object.defineProperty(Object.prototype, 'isHTMLDocument', {
+    value() {
+      return isWindow.htmlDocument(this);
+    }
+  });
+
+  Object.defineProperty(Object.prototype, 'isXMLDocument', {
+    value() {
+      return isWindow.xmlDocument(this);
+    }
+  });
+  Object.defineProperty(Object.prototype, 'isXMLElement', {
+    value() {
+      return xml(this);
+    }
+  });
+  Object.defineProperty(Object.prototype, 'isHTMLDocument', {
+    value() {
+      return html.document(this);
+    }
+  });
+  Object.defineProperty(Object.prototype, 'isHTMLElement', {
+    value() {
+      return html(this);
+    }
+  });
+
+  const HtmlNameTypeMap = {
+    a: 'Anchor',
+    abbr: '',
+    address: '',
+    area: 'Area',
+    article: '',
+    aside: '',
+    audio: 'Audio',
+    b: 'Bold',
+    base: 'Base',
+    basefont: '',
+    bdi: '',
+    blockquote: '',
+    body: 'Body',
+    br: 'BR',
+    button: 'Button',
+    canvas: 'Canvas',
+    caption: 'TableCaption',
+    center: '',
+    cite: '',
+    code: '',
+    col: 'TableCol',
+    colgroup: '',
+    command: '',
+    datalist: 'DataList',
+    dd: 'DD',
+    del: 'Mod',
+    details: 'Details',
+    dfn: '',
+    dialog: 'Dialog',
+    dir: 'Directory',
+    div: 'Div',
+    dl: 'DList',
+    dt: 'DT',
+    em: 'EM',
+    embed: 'Embed',
+    fieldset: 'fieldset',
+    figcaption: '',
+    figure: '',
+    font: 'Font',
+    footer: 'Footer',
+    form: 'Form',
+    frame: 'Frame',
+    frameset: 'Frameset',
+    head: 'Head',
+    heading: 'Heading',
+    header: '',
+    hr: 'HR',
+    html: 'Html',
+    i: 'Italy',
+    iframe: 'IFrame',
+    img: 'Image',
+    input: 'Image',
+    ins: '',
+    kbd: '',
+    keygen: '',
+    label: 'Label',
+    legend: 'Legend',
+    li: 'LI',
+    link: 'Link',
+    main: '',
+    map: 'Map',
+    mark: 'Mark',
+    marquee: 'Marquee',
+    menu: 'Menu',
+    menuitem: 'MenuItem', // firefox
+    meta: 'Mata',
+    meter: 'Meter',
+    nav: '',
+    noframes: '',
+    noscript: '',
+    object: 'Object',
+    ol: 'OList',
+    optgroup: 'OptGroup',
+    option: 'Option',
+    output: 'Oputput',
+    p: 'Paragraph',
+    param: 'Param',
+    picture: 'Picture',
+    pre: 'Pre',
+    progress: 'Progress',
+    q: 'Quote',
+    rp: 'RP',
+    rt: 'RT',
+    ruby: '',
+    samp: '',
+    script: 'Script',
+    section: '',
+    select: 'Select',
+    small: '',
+    source: 'Source',
+    span: 'Span',
+    strike: '',
+    strong: '',
+    style: 'Style',
+    sub: '',
+    summary: '',
+    sup: '',
+    table: 'Table',
+    tcell: 'TableCell',
+    textarea: 'TextArea',
+    time: 'Time',
+    title: 'Title',
+    tr: 'TableRow',
+    track: 'Track',
+    tt: 'TT',
+    u: 'UnderLine',
+    ul: 'UList',
+    var: '',
+    video: 'Video',
+    wbr: ''
+  };
+  for (const [tag, type] of Object.entries(HtmlNameTypeMap)) {
+    let typeName = type;
+    if (!type) {
+      const [first, ...others] = tag;
+      typeName = first + others.join('');
+    }
+    Object.defineProperty(Object.prototype, `isHTML${typeName}Element`, {
+      value() {
+        return html[tag](this);
+      }
+    });
+  }
+  ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'].map((item) => {
+    Object.defineProperty(Object.prototype, `isHTML${item.toUpperCase()}HeadingElement`, {
+      value() {
+        return html.heading[item](this);
+      }
+    });
+    return 0;
+  });
+
+  ['button', 'checkbox', 'color', 'date', 'datetime', 'datetimeLocale', 'email', 'file', 'hidden', 'image', 'month', 'number', 'password', 'radio', 'range', 'reset', 'search', 'submit', 'tel'].map((item) => {
+    const [first, ...others] = item;
+    const item2 = first.toUpperCase() + others.join('');
+    Object.defineProperty(Object.prototype, `isHTML${item2}InputElement`, {
+      value() {
+        return html.input[item2](this);
+      }
+    });
+    return 0;
+  });
+
+  Object.defineProperty(Object.prototype, 'isHTMLTableSectionElement', {
+    value() {
+      return html.table.section(this);
+    }
+  });
+  Object.defineProperty(Object.prototype, 'isHTMLTableHeadElement', {
+    value() {
+      return html.table.section.thead(this);
+    }
+  });
+  Object.defineProperty(Object.prototype, 'isHTMLTableBodyElement', {
+    value() {
+      return html.table.tbody(this);
+    }
+  });
+  Object.defineProperty(Object.prototype, 'isHTMLTableFootElement', {
+    value() {
+      return html.table.section.tfoot(this);
+    }
+  });
+  Object.defineProperty(Object.prototype, 'isHTMLTableCellElement', {
+    value() {
+      return html.tcell(this);
+    }
+  });
+  Object.defineProperty(Object.prototype, 'isHTMLTableTHCellElement', {
+    value() {
+      return html.tcell.th(this);
+    }
+  });
+  Object.defineProperty(Object.prototype, 'isHTMLTableTDCellElement', {
+    value() {
+      return html.tcell.td(this);
+    }
+  });
 }

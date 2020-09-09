@@ -1,46 +1,46 @@
 "use strict";
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
-
 var _extend = _interopRequireDefault(require("extend"));
 
-var _type = _interopRequireDefault(require("./lib/type.js"));
+var _type = _interopRequireDefault(require("./lib/type"));
 
-var _isArgs = _interopRequireDefault(require("./lib/isArgs.js"));
+var _isArgs = _interopRequireDefault(require("./lib/isArgs"));
 
-var _isArray = _interopRequireDefault(require("./lib/isArray.js"));
+var _isArray = _interopRequireDefault(require("./lib/isArray"));
 
-var _isBool = _interopRequireDefault(require("./lib/isBool.js"));
+var _isBool = _interopRequireDefault(require("./lib/isBool"));
 
-var _isDate = _interopRequireDefault(require("./lib/isDate.js"));
+var _isDate = _interopRequireDefault(require("./lib/isDate"));
 
-var _isEmpty = _interopRequireDefault(require("./lib/isEmpty.js"));
+var _isEmpty = _interopRequireDefault(require("./lib/isEmpty"));
 
-var _isError = _interopRequireDefault(require("./lib/isError.js"));
+var _isError = _interopRequireDefault(require("./lib/isError"));
 
-var _isFunction = _interopRequireDefault(require("./lib/isFunction.js"));
+var _isFunction = _interopRequireDefault(require("./lib/isFunction"));
 
-var _isObject = _interopRequireDefault(require("./lib/isObject.js"));
+var _isObject = _interopRequireDefault(require("./lib/isObject"));
 
-var _isNull = _interopRequireDefault(require("./lib/isNull.js"));
+var _isNull = _interopRequireDefault(require("./lib/isNull"));
 
-var _isNumber = _interopRequireDefault(require("./lib/isNumber.js"));
+var _isNumber = _interopRequireDefault(require("./lib/isNumber"));
 
-var _isPromise = _interopRequireDefault(require("./lib/isPromise.js"));
+var _isPromise = _interopRequireDefault(require("./lib/isPromise"));
 
-var _isRegExp = _interopRequireDefault(require("./lib/isRegExp.js"));
+var _isRegExp = _interopRequireDefault(require("./lib/isRegExp"));
 
-var _isString = _interopRequireDefault(require("./lib/isString.js"));
+var _isString = _interopRequireDefault(require("./lib/isString"));
 
-var _isSymbol = _interopRequireDefault(require("./lib/isSymbol.js"));
+var _isSymbol = _interopRequireDefault(require("./lib/isSymbol"));
 
-var _isUndefined = _interopRequireDefault(require("./lib/isUndefined.js"));
+var _isUndefined = _interopRequireDefault(require("./lib/isUndefined"));
 
-var _isBom = _interopRequireDefault(require("./lib/isBom.js"));
+var _isBom = _interopRequireDefault(require("./lib/isBom"));
 
-var _isDom = require("./lib/isDom.js");
+var _isDom = require("./lib/isDom");
 
-var is = function is(value) {
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+var isFun = function isFun(value) {
   var fns = {
     args: function args() {
       return (0, _isArgs["default"])(value);
@@ -177,10 +177,16 @@ var is = function is(value) {
     fns.html[m] = function () {
       return _isDom.html[m](value);
     };
-  })[('h1', 'h2', 'h3', 'h4', 'h5', 'h6')].map(function (m) {
+
+    return 0;
+  });
+  ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'].map(function (m) {
     fns.html.heading[m] = _isDom.html.heading[m](value);
-  })[('button', 'checkbox', 'color', 'date', 'datetime', 'datetimeLocale', 'email', 'file', 'hidden', 'image', 'month', 'number', 'password', 'radio', 'range', 'reset', 'search', 'search', 'submit', 'tel', 'date')].map(function (m) {
+    return 0;
+  });
+  ['button', 'checkbox', 'color', 'date', 'datetime', 'datetimeLocale', 'email', 'file', 'hidden', 'image', 'month', 'number', 'password', 'radio', 'range', 'reset', 'search', 'search', 'submit', 'tel', 'date'].map(function (m) {
     fns.html.input[m] = _isDom.html.input[m](value);
+    return 0;
   });
 
   fns.html.table.section = function () {
@@ -189,9 +195,11 @@ var is = function is(value) {
 
   ['thead', 'tbody', 'tfoot'].map(function (m) {
     fns.html.table.section[m] = _isDom.html.table.section[m](value);
+    return 0;
   });
   ['head', 'cell'].map(function (m) {
     fns.html.td[m] = _isDom.html.td[m](value);
+    return 0;
   });
 
   fns.html.document = function () {
@@ -201,7 +209,7 @@ var is = function is(value) {
   return fns;
 };
 
-(0, _extend["default"])(true, is, {
+(0, _extend["default"])(true, isFun, {
   args: _isArgs["default"],
   array: _isArray["default"],
   bool: _isBool["default"],
@@ -222,4 +230,4 @@ var is = function is(value) {
   html: _isDom.html,
   xml: _isDom.xml
 });
-module.exports = is;
+module.exports = isFun;

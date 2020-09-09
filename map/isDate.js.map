@@ -1,1 +1,0 @@
-{"version":3,"names":[],"mappings":"","sources":["isDate.js"],"sourcesContent":["import fnToStr from '../core/fnToStr.js';\nimport getTypeRegex from '../core/getTypeRegex.js';\n\nexport default ( value ) => getTypeRegex( 'date' ).test( fnToStr.call( value ) );"],"file":"../lib/isDate.js"}

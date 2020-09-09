@@ -1,3 +1,4 @@
-import fnToStr from '../core/fnToStr.js';
-import getTypeRegex from '../core/getTypeRegex.js';
-export default ( value ) => getTypeRegex( 'function' ).test( fnToStr.call( value ) );
+import fnToStr from '../core/fnToStr';
+import getTypeRegex from '../core/getTypeRegex';
+
+export default (value) => getTypeRegex('function').test(fnToStr.call(value));

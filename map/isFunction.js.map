@@ -1,1 +1,0 @@
-{"version":3,"names":[],"mappings":"","sources":["isFunction.js"],"sourcesContent":["import fnToStr from '../core/fnToStr.js';\nimport getTypeRegex from '../core/getTypeRegex.js';\nexport default ( value ) => getTypeRegex( 'function' ).test( fnToStr.call( value ) );"],"file":"../lib/isFunction.js"}

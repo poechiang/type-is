@@ -1,35 +1,29 @@
-import fnToStr from '../core/fnToStr.js';
-import getTypeRegex from '../core/getTypeRegex.js';
-import isEmpty from './isEmpty.js';
-
+import fnToStr from '../core/fnToStr';
+import getTypeRegex from '../core/getTypeRegex';
+import isEmpty from './isEmpty';
 
 const { getPrototypeOf: protoOf } = Object;
 
-
-const class2Type = {}
+const class2Type = {};
 
 const { hasOwnProperty: ownProp } = class2Type;
 
+const isObject = (value) => getTypeRegex('object').test(fnToStr.call(value));
 
-const isObject = ( value ) => getTypeRegex( 'object' ).test( fnToStr.call( value ) )
+isObject.empty = (value) => isObject(value) && isEmpty(value);
 
-isObject.empty = ( value ) => isObject( value ) && isEmpty( value );
+isObject.plain = (value) => {
+  if (!value) {
+    return false;
+  }
 
-isObject.plain = ( value ) => {
-    let proto, Ctor;
+  const proto = protoOf(value);
 
-    if ( !value ) {
-        return false;
-    }
+  if (!proto) {
+    return true;
+  }
 
-    proto = protoOf( value );
-
-    if ( !proto ) {
-        return true;
-    }
-
-    Ctor = propertyOf( proto, "constructor" );
-    return typeof Ctor === "function" && ownProp.toString.call( Ctor ) === ownProp.toString.call( Object );
-
+  const Ctor = ownProp.call(proto, 'constructor') && proto.constructor;
+  return typeof Ctor === 'function' && ownProp.toString.call(Ctor) === ownProp.toString.call(Object);
 };
 export default isObject;

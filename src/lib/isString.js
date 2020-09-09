@@ -1,8 +1,8 @@
-import fnToStr from '../core/fnToStr.js';
-import getTypeRegex from '../core/getTypeRegex.js';
+import fnToStr from '../core/fnToStr';
+import getTypeRegex from '../core/getTypeRegex';
 
-const isString = ( value ) => getTypeRegex( 'string' ).test( fnToStr.call( value ) );
+const isString = (value) => getTypeRegex('string').test(fnToStr.call(value));
 
-isString.empty = ( value ) => getTypeRegex( 'string' ).test( fnToStr.call( value ) ) && value.length <= 0;
+isString.empty = (value) => getTypeRegex('string').test(fnToStr.call(value)) && value.length <= 0;
 
 export default isString;

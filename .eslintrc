@@ -1,0 +1,20 @@
+{
+  "parser": "babel-eslint",
+  "extends": "airbnb",
+  "env":
+  {
+    "mocha": true
+  },
+  "globals":
+  {
+    "window": true,
+    "document": true,
+    "isNull": "readonly"
+  },
+  "rules":
+  {
+    "comma-dangle": ["error", "only-multiline"],
+    "no-restricted-globals": ["error", "event", "isNull"],
+    "no-restricted-syntax": ["error", "iterators/generators"]
+  }
+}

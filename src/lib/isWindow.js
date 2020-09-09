@@ -1,1 +1,3 @@
-export default ( value ) => !isNull( value ) && obj === obj.window;
+import isNull from './isNull';
+
+export default (value) => !isNull(value) && value === value.window;

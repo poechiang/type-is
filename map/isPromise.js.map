@@ -1,1 +1,0 @@
-{"version":3,"names":[],"mappings":"","sources":["isPromise.js"],"sourcesContent":["import fnToStr from '../core/fnToStr.js';\nimport getTypeRegex from '../core/getTypeRegex.js';\n\nexport default ( value ) => getTypeRegex( 'promise' ).test( fnToStr.call( value ) );"],"file":"../lib/isPromise.js"}

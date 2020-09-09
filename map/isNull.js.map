@@ -1,1 +1,0 @@
-{"version":3,"names":[],"mappings":"","sources":["isNull.js"],"sourcesContent":["import fnToStr from '../core/fnToStr.js';\nimport getTypeRegex from '../core/getTypeRegex.js';\n\nexport default ( value ) => getTypeRegex( 'null' ).test( fnToStr.call( value ) );"],"file":"../lib/isNull.js"}
