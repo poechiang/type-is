@@ -1,6 +1,6 @@
 {
   "name": "@poech/type-is",
-  "version": "2.0.4",
+  "version": "2.0.7",
   "description": "js type testing library",
   "main": "index.js",
   "repository": "git@github.com:poechiang/type-is.git",
@@ -14,16 +14,17 @@
     "core/*.js"
   ],
   "scripts": {
-    "clean": "rimraf lib",
+    "clean": "rimraf lib && rimraf core",
     "test": "yarn lint && yarn cover",
     "test:prod": "cross-env BABEL_ENV=production yarn test",
-    "test:only": "mocha --require babel-core/register --require babel-polyfill --recursive",
+    "test:only": "mocha --require @babel/register --require @babel/polyfill --recursive",
     "test:watch": "npm test -- --watch",
     "test:examples": "node examples/",
     "cover": "nyc --check-coverage yarn test:only",
     "lint": "eslint src --fix",
     "build": "cross-env BABEL_ENV=production babel src --out-dir .",
-    "prepublish": "yarn clean && yarn lint && yarn build"
+    "prepublish": "yarn clean && yarn lint && yarn build",
+    "pretest": "yarn clean && yarn lint && yarn build"
   },
   "devDependencies": {
     "@babel/cli": "^7.11.6",
