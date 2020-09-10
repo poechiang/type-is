@@ -248,11 +248,6 @@ if (!Object.prototype.is) {
       return xml(this);
     }
   });
-  Object.defineProperty(Object.prototype, 'isHTMLDocument', {
-    value() {
-      return html.document(this);
-    }
-  });
   Object.defineProperty(Object.prototype, 'isHTMLElement', {
     value() {
       return html(this);
@@ -311,7 +306,7 @@ if (!Object.prototype.is) {
     i: 'Italy',
     iframe: 'IFrame',
     img: 'Image',
-    input: 'Image',
+    input: 'Input',
     ins: '',
     kbd: '',
     keygen: '',
@@ -421,11 +416,6 @@ if (!Object.prototype.is) {
   Object.defineProperty(Object.prototype, 'isHTMLTableFootElement', {
     value() {
       return html.table.section.tfoot(this);
-    }
-  });
-  Object.defineProperty(Object.prototype, 'isHTMLTableCellElement', {
-    value() {
-      return html.tcell(this);
     }
   });
   Object.defineProperty(Object.prototype, 'isHTMLTableTHCellElement', {

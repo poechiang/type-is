@@ -7,37 +7,10 @@
  *        Element
  *          HTMLELEMENT
  */
-import { jsdom } from 'jsdom';
-import { XMLHttpRequest } from 'xmlhttprequest';
-import location from 'location';
-import navigator from 'navigator';
-// import fnToStr from '../core/fnToStr';
-// import getTypeRegex from '../core/getTypeRegex';
 
-if (window == null) {
-  window = jsdom().createWindow();
-  // assume window is a jsdom instance...
-  // jsdom includes an incomplete version of XMLHttpRequest
-  window.XMLHttpRequest = XMLHttpRequest;
-  // trick jQuery into thinking CORS is supported (should be in node-XMLHttpRequest)
-  window.XMLHttpRequest.prototype.withCredentials = false;
+import window from '../core/window';
 
-  if (window.location == null) {
-    window.location = location;
-  }
-
-  if (window.navigator == null) {
-    window.navigator = navigator;
-  }
-}
-
-document = document || window.document;
-
-// const typeOf = ( dom, type ) => getTypeRegex( type ).test( fnToStr.call( dom ) );
-
-// const _instanceOf = ( dom, type ) => window && dom instanceOf window[ type ];
-
-const isNode = (node, type = 'Node') => window && (node instanceof window[type]);
+const isNode = (node, type = 'Node') => !!window && (node instanceof window[type]);
 
 const isDocument = (dom, type = '') => isNode(dom, `${type}Document`);
 
