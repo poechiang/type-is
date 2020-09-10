@@ -1,6 +1,6 @@
 {
   "name": "@poech/type-is",
-  "version": "2.0.7",
+  "version": "2.0.8",
   "description": "js type testing library",
   "main": "index.js",
   "repository": "git@github.com:poechiang/type-is.git",
