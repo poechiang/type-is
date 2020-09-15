@@ -197,8 +197,13 @@ var isFun = function isFun(value) {
     fns.html.table.section[m] = _isDom.html.table.section[m](value);
     return 0;
   });
-  ['head', 'cell'].map(function (m) {
-    fns.html.td[m] = _isDom.html.td[m](value);
+
+  fns.html.tcell = function () {
+    return _isDom.html.tcell(value);
+  };
+
+  ['th', 'td'].map(function (m) {
+    fns.html.tcell[m] = _isDom.html.tcell[m](value);
     return 0;
   });
 

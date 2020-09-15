@@ -80,5 +80,24 @@ describe('#is-latest:', () => {
     it('symbol (Symbol) is Symbol', () => {
       assert.ok(is.symbol(symbol));
     });
+    it('is.html.tcell is function', () => {
+      assert.ok(is.function(is.html.tcell));
+    });
+    it('is.html.tcell.td is function', () => {
+      assert.ok(is.function(is.html.tcell.td));
+    });
+    it('is.html.td is not function', () => {
+      assert.ok(!is.function(is.html.td));
+    });
+    it('is \'s instance is ok', () => {
+      try {
+        var _is_ = is()
+
+        assert.ok(!!_is_);
+      } catch {
+        assert.ok(false);
+      }
+
+    });
   });
 });

@@ -96,8 +96,9 @@ const isFun = function isFun(value) {
     fns.html.table.section[m] = html.table.section[m](value);
     return 0;
   });
-  ['head', 'cell'].map((m) => {
-    fns.html.td[m] = html.td[m](value);
+  fns.html.tcell = () => html.tcell(value);
+  ['th', 'td'].map((m) => {
+    fns.html.tcell[m] = html.tcell[m](value);
     return 0;
   });
 
